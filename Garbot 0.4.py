@@ -55,8 +55,9 @@ def locate_desktop():
         else:
             os.chdir(f"/home/{username}/Desktop")
     except:
-        speak("Ahm Ahm, Well that is really embarrassing, i cant locate the path to your desktop can you paste here for me?")
-        path = input("Enter the path to the desktop here: ")
+        if path == "":
+            speak("Ahm Ahm, Well that is really embarrassing, i cant locate the path to your desktop can you paste here for me?")
+            path = input("Enter the path to the desktop here: ")
         os.chdir(path)
 
 def desktop():
@@ -248,3 +249,4 @@ exit ---> its pretty obvious it stops the program
 speak("finally some peaceful time alone")
 speak("Now about your request...")
 speak("GET OUT!", 200)
+
