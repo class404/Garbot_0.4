@@ -57,6 +57,7 @@ def locate_desktop():
     except:
         speak("Ahm Ahm, Well that is really embarrassing, i cant locate the path to your desktop can you paste here for me?")
         path = input("Enter the path to the desktop here: ")
+        os.chdir(path)
 
 def desktop():
     global username
@@ -80,8 +81,8 @@ time ---> shows current time
 note <text> ---> used to make a file named Notes.txt which saves the text you entered
 show note ---> shows the Notes.txt file
 change note <old_text> | <new_text> ---> removes certin text from the Notes.txt file
-roast me ---> he will end your whole career with this one
-joke ---> will tell you a random joke
+roast me [optional: a number between 1-5]---> he will end your whole career with this one
+joke [optional: a number between 1-5] ---> will tell you a random joke
 where are the classes? ---> reveales answers
 exit ---> its pretty obvious it stops the program
             """)
@@ -172,9 +173,12 @@ exit ---> its pretty obvious it stops the program
                 else:
                     speak("Sorrey dude i tried my best, try another command.")
 
-    elif command == "roast me":
+    elif " ".join(command.split()[0:2]) == "roast me":
         roast_counter +=1
-        roast = random.randint(1,5)
+        if len(command.split()) > 2:
+            roast = int(command.split()[2])
+        else:
+                roast = random.randint(1,5)
         if roast_counter > 5:
             webbrowser.open("https://www.youtube.com/watch?v=PkKfV0ATrH4")
         elif roast == 1:
@@ -197,9 +201,14 @@ exit ---> its pretty obvious it stops the program
         elif roast == 5:
             speak("why bro you FR?, Eject your drama plus accomplish more")
             speak("anyways read the final letter of each word in the previous message and you will get what you requested 💀")
+        else:
+            speak("Please enter a valid variable between 1-5")
     
-    elif command == "joke":
-        joke = random.randint(1,5)
+    elif command.split()[0] == "joke":
+        if len(command.split()) > 1:
+            joke = int(command.split()[1])
+        else:
+            joke = random.randint(1,5)
         if joke == 1:
             speak(f"{username} XD")
             speak("This is supposed to be your username, it would be really embarrassing if you didnt set it up to be your name")
@@ -216,6 +225,8 @@ exit ---> its pretty obvious it stops the program
         elif joke ==5:
             speak("I guess i will hand over the mic for this one.")
             webbrowser.open("https://www.youtube.com/watch?v=Jmr-hWuoM2o")
+        else:
+            speak("Please enter a valid variable between 1-5")
         
     elif command == "/gamemode 1":
         speak("WOW, You are a minecraft OG")
@@ -236,8 +247,4 @@ exit ---> its pretty obvious it stops the program
 
 speak("finally some peaceful time alone")
 speak("Now about your request...")
-speak("GET OUT!", 200)
-speak("finally some peaceful time alone")
-speak("Now about your request...")
-
 speak("GET OUT!", 200)
