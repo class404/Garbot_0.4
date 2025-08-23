@@ -47,14 +47,27 @@ def speak(text,speed = 140, sleep_time=0):
     except Exception as e:
         print("speach error", e)
 
-def desktop():
-    if username != "":
+def locate_desktop():
+    global username
+    try:
         if os.name == "nt":
             os.chdir(f"C:\\Users\\{username}\\Desktop")
         else:
             os.chdir(f"/home/{username}/Desktop")
+    except:
+        speak("Ahm Ahm, Well that is really embarrassing, i cant locate the path to your desktop can you paste here for me?")
+        path = input("Enter the path to the desktop here: ")
+
+def desktop():
+    global username
+    if username != "":
+        locate_desktop()
     else:
-         raise Exception
+         speak("Shoot... i cant seem to know your user name, can you provide it to me? ")
+         username = input("Enter Your username: ")
+         locate_desktop()
+    
+    
 
 command = input("Enter your first command! \n Garbot# ")
 while command != "exit":
@@ -223,4 +236,8 @@ exit ---> its pretty obvious it stops the program
 
 speak("finally some peaceful time alone")
 speak("Now about your request...")
+speak("GET OUT!", 200)
+speak("finally some peaceful time alone")
+speak("Now about your request...")
+
 speak("GET OUT!", 200)
